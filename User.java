@@ -13,19 +13,11 @@ public class User {
         this.hash = hash;
     }
 
-    // public static String getSalt(String login) {
-    //     return salt;
-    // }
+    public String getSalt() {
+        return this.salt;
+    }
 
-    // public static String setSalt(String login) {
-    //     String salt = ;
-    //     return salt;
-    // }
-
-    // public static String getPasswordHash(String login) {
-    //     return true;
-    // }
-
-    // public static void setPasswordHash(String login) {
-    // }
+    public String getHash() {
+        return this.hash;
+    }
 }

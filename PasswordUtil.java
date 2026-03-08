@@ -1,5 +1,7 @@
 package lab3;
 
+import lab3.User;
+import lab3.UserStorage;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.security.MessageDigest;
@@ -31,7 +33,11 @@ public class PasswordUtil {
         }
     }
 
-    public static String verifyPassword(String password) {
-        return true;
+    public static boolean verifyPassword(String login, String password) {
+        User user = UserStorage.users.get(login);
+        String salt = user.getSalt();
+        String cur_hash = hashPassword(password, salt);
+        String real_hash = user.getHash();
+        return real_hash.equals(cur_hash);
     }
 }

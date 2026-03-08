@@ -41,7 +41,6 @@ public class Main {
                 AuthService.changePassword();
             }
         }
-
         sc.close();
     }
 }

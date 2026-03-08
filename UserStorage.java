@@ -31,8 +31,8 @@ public class UserStorage {
         }
     }
 
-    public User getUser(String login) {
-        return users.get(login);
+    public static boolean getUser(String login) {
+        return users.containsKey(login);
     }
 
     public static void saveUsers(String login, String salt, String hash) {
