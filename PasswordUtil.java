@@ -3,6 +3,7 @@ package lab3;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class PasswordUtil {
     public static String generateSalt() {
@@ -15,15 +16,19 @@ public class PasswordUtil {
         return salt;
     }
 
-    public static String hashPassword(String password, String salt) {
-        String saltedPassword = salt + password;
+    public static String hashPassword(String password, String salt){
+        try {
+            String saltedPassword = salt + password;
 
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        byte[] hashBytes = md.digest(saltedPassword.getBytes());
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = md.digest(saltedPassword.getBytes());
 
-        String hash = Base64.getEncoder().encodeToString(hashBytes);
+            String hash = Base64.getEncoder().encodeToString(hashBytes);
 
-        return hash;
+            return hash;
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Ошибка хеширования", e);
+        }
     }
 
     public static String verifyPassword(String password) {

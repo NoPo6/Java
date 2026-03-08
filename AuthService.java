@@ -5,24 +5,24 @@ import Lab3.UserStorage;
 
 public class AuthService {
     
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
-    public void registerUser(String[] args) {
+    public static void registerUser(){
         System.out.print("Введите логин: ");
         String login = sc.nextLine();
-        System.out.print("Введите пороль: ");
+        System.out.print("Введите пароль: ");
         String password = sc.nextLine();
-        System.out.print("Повторите пороль: ");
+        System.out.print("Повторите пароль: ");
         String password_check = sc.nextLine();
         int count = 0;
-        while (count < 4 && password != password_check){
-            System.out.print("Пороли не совпадают!\nПовторите пороль: ");
+        while (count < 1 && !password.equals(password_check)){
+            System.out.print("\nПароли не совпадают!\nПовторите пороль: ");
             password_check = sc.nextLine();
             count += 1;
         }
-        if (count == 4){
+        if (count == 1){
             System.out.println("Превышен лимит попыток, возврат в главное меню!");
-            Main.mainMenu();
+            return;
         } 
 
         String salt = PasswordUtil.generateSalt();
@@ -31,17 +31,17 @@ public class AuthService {
         System.out.println("Пользователь " + login + " успешно создан!");
     }
 
-    public static void loginUser(String[] args) {
+    public static void loginUser() {
         
         System.out.println("Вход выполнен успешно!");
     }
 
-    public static void changePassword(String[] args) {
+    public static void changePassword() {
         
         System.out.println("Пороль успешно изменен!");
     }
 
-    public static boolean checkLoginExists(String[] args) {
+    public static boolean checkLoginExists() {
         
         retrun is_exist;
     }
