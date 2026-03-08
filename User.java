@@ -13,11 +13,23 @@ public class User {
         this.hash = hash;
     }
 
+    public String getLogin() {
+        return this.login;
+    }
+
     public String getSalt() {
         return this.salt;
     }
 
     public String getHash() {
         return this.hash;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+     
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 }

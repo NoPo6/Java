@@ -39,6 +39,7 @@ public class Main {
                 AuthService.loginUser();
             } else if (input == 3) {
                 AuthService.changePassword();
+                UserStorage.saveUsersToFile();
             }
         }
         sc.close();

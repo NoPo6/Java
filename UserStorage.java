@@ -1,5 +1,6 @@
 package lab3;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
+import lab3.User;
 
 public class UserStorage {
     
@@ -37,7 +39,8 @@ public class UserStorage {
 
     public static void saveUsers(String login, String salt, String hash) {
         try (FileWriter writer = new FileWriter("users.txt", true)){
-            writer.write(login + "|" + salt + "|" + hash + '\n');
+            writer.write(login + "|" + salt + "|" + hash);
+            writer.newLine();
             writer.close();
             System.out.println("Пользователь создан успешно!");
         } catch (IOException e) {
@@ -52,11 +55,20 @@ public class UserStorage {
         saveUsers(login, salt, hash);
     }
 
-    // public static void updateUser() {
-        
-    // }
+    public static void saveUsersToFile() {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt"))) {
+        for (User user : users.values()) {
+            writer.write(user.getLogin() + "|" + user.getSalt() + "|" + user.getHash());
+            writer.newLine();
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 
-    // public static void checkUser() {
-        
-    // }
+    public static void changeUserPassword(String login, String salt, String hash) {
+        User user = users.get(login);
+        user.setSalt(salt);
+        user.setHash(hash);
+    }
 }
