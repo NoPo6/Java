@@ -8,21 +8,27 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        // инициализация файла
         File file = new File("users.txt");
 
+        // проверка существования файла, если не существует, то создаем
         if (!file.exists()) {
             file.createNewFile();
         } else {
             UserStorage.loadUsers(file);
         }
 
+        //запуск главного меню
         mainMenu();
     }
 
+    // главное меню
     public static void mainMenu() {
         Scanner sc = new Scanner(System.in);
 
+        // бесконеычный цикл главного меню
         while (true) {
+            // опции главного меню
             System.out.println("Главное меню:\n"
                     + "1. Создать пользователя\n"
                     + "2. Вход по логину и паролю\n"
@@ -31,15 +37,16 @@ public class Main {
 
             int input = sc.nextInt();
 
+            // реакция на выбор в главном меню
             if (input == 4) {
-                break;
+                break;                                  // завершение программы
             } else if (input == 1) {
-                AuthService.registerUser();
+                AuthService.registerUser();             // регистрация нового пользователя
             } else if (input == 2) {
-                AuthService.loginUser();
+                AuthService.loginUser();                // вход по логину и поролю
             } else if (input == 3) {
-                AuthService.changePassword();
-                UserStorage.saveUsersToFile();
+                AuthService.changePassword();           // смена пороля
+                UserStorage.saveUsersToFile();          // перезапись файла
             }
         }
         sc.close();

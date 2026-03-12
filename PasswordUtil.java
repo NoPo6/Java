@@ -8,19 +8,21 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class PasswordUtil {
+    // генерация соли
     public static String generateSalt() {
-        byte[] saltBytes = new byte[16];
-        SecureRandom saltGenerator = new SecureRandom();
-        saltGenerator.nextBytes(saltBytes);
+        byte[] saltBytes = new byte[16];    // массив из 16 байтов
+        SecureRandom saltGenerator = new SecureRandom();  
+        saltGenerator.nextBytes(saltBytes);  
 
-        String salt = Base64.getEncoder().encodeToString(saltBytes);
+        String salt = Base64.getEncoder().encodeToString(saltBytes);    // преобразование в base64
 
         return salt;
     }
 
+    // генерация хэша пороля 
     public static String hashPassword(String password, String salt){
         try {
-            String saltedPassword = salt + password;
+            String saltedPassword = salt + password;      
 
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = md.digest(saltedPassword.getBytes());
@@ -33,6 +35,7 @@ public class PasswordUtil {
         }
     }
 
+    // проверка правильности введенного пороля с поролем из файла
     public static boolean verifyPassword(String login, String password) {
         User user = UserStorage.users.get(login);
         String salt = user.getSalt();
