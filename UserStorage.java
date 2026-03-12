@@ -44,7 +44,7 @@ public class UserStorage {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true))) {
             writer.write(login + "|" + salt + "|" + hash);
             writer.newLine();
-            System.out.println("Пользователь создан успешно!");
+            System.out.println("Пользователь " + login + " успешно создан!");
         } catch (IOException e) {
             System.out.println("Ошибка при сохранении пользователей");
             e.printStackTrace();

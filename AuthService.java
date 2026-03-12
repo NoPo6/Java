@@ -106,8 +106,6 @@ public class AuthService {
         String hash = PasswordUtil.hashPassword(password, salt);
 
         UserStorage.addUser(login, salt, hash);
-
-        System.out.println("Пользователь " + login + " успешно создан!");
     }
 
     // вход для существующего пользователя
